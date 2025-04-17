@@ -44,7 +44,7 @@ jobs:
               inputs:
                 script: |
                   set -x
-                  echo "##vso[task.setvariable variable=jfrogToken;issecret=true]$(curl --location '$(JFROGJPDURL)/access/api/v1/oidc/token' --header 'Content-Type: application/json' --data '{"grant_type": "urn:ietf:params:oauth:grant-type:token-exchange", "subject_token_type": "urn:ietf:params:oauth:token-type:id_token", "subject_token": "$(idToken)", "provider_name": "oidcazure" } ' | jq .access_token | tr -d '"')"
+                  echo "##vso[task.setvariable variable=jfrogToken;issecret=true]$(curl --location '$(JFROGJPDURL)/access/api/v1/oidc/token' --header 'Content-Type: application/json' --data '{"grant_type": "urn:ietf:params:oauth:grant-type:token-exchange", "subject_token_type": "urn:ietf:params:oauth:token-type:id_token", "subject_token": "$(idToken)", "provider_name": "jfrog-azure-oidc" } ' | jq .access_token | tr -d '"')"
               displayName: 'Acquire JFrog token' 
 
             - task: CmdLine@2
