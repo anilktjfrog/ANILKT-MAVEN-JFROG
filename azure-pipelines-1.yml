@@ -19,7 +19,7 @@ jobs:
   environment: 
     name: gcp
     resourceType: virtualMachine
-    resourceName: nagag-vm
+    resourceName: ip-
   strategy:
     runOnce:
       deploy:   
