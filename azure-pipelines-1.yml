@@ -19,7 +19,7 @@ jobs:
   environment: 
     name: gcp
     resourceType: virtualMachine
-    resourceName: ip-
+    resourceName: ip-172-18-97-157
   strategy:
     runOnce:
       deploy:   
