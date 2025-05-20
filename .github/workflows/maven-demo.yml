@@ -7,9 +7,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      OIDC_AUDIENCE: 'jfrog-github'
-      OIDC_PROVIDER: 'github-oidc-test'
+      OIDC_AUDIENCE: 'korber-workshop'
+      OIDC_PROVIDER: 'korber-workshop-github-oidc'
       MAVEN_REPO: 'korber-workshop-maven-dev'
+      BUILD_NAME: "maven-build"
+      BUILD_ID: "${{github.run_number}}"
     
     steps:
       - name: Checkout
@@ -44,13 +46,13 @@ jobs:
         run: jf audit
         
       - name: Build and Install Maven Project
-        run: jf mvn clean install -DskipTests --build-name="anilkt-mvn-publish" --build-number=${{ github.run_number }}
+        run: jf mvn clean install -DskipTests --build-name=${{env.BUILD_NAME}} --build-number=${{env.BUILD_ID}}
 
       - name: Collect Env
-        run: jf rt bce korber-mvn-publish ${{ github.run_number }}
+        run: jf rt bce ${{env.BUILD_NAME}} ${{env.BUILD_ID}} 
 
       - name: Collect VCS info
-        run: jf rt bag korber-mvn-publish ${{ github.run_number }}
+        run: jf rt bag ${{env.BUILD_NAME}} ${{env.BUILD_ID}} 
 
       - name: Publish build
-        run: jf rt bp korber-mvn-publish ${{ github.run_number }}
+        run: jf rt bp ${{env.BUILD_NAME}} ${{env.BUILD_ID}}
